@@ -65,7 +65,7 @@ func VerificationEndpoint(w http.ResponseWriter, r *http.Request) {
 	mode := r.URL.Query().Get("hub.mode")
 	token := r.URL.Query().Get("hub.verify_token")
 
-	if mode != "" && token == os.Getenv("2558051434523679|R8T-BcdI7GcfkC6PuaONPQ8O2xY") {
+	if mode != "" && token == os.Getenv("EAAkWiMMSbB8BAAgZCxS8WblOiRfr3Lo0BXbxOM6jVt69kNZA2UEQI3gQ4UsU5UZCHZCbVFG7TXx16T6exio08RBqBi0Tr8RnLpxPSADhhdU0JfQ94MaFkRS4nS4s9OZCZAGKUtXkrsJgaL4lKuFKhmuXofvOxxlnFeYwQohFkLJujbx7QFjaK0Yi2pFIXnrpqofW3c1biexVuGF7QMLLlA") {
 		w.WriteHeader(200)
 		w.Write([]byte(challenge))
 	} else {
@@ -134,7 +134,6 @@ func main() {
 	port := getPort()
 
 	r := mux.NewRouter()
-	r.Handle("/", http.FileServer(http.Dir("./views"))).Methods("GET")
 	r.HandleFunc("/webhook", VerificationEndpoint).Methods("GET")
 	r.HandleFunc("/webhook", MessagesEndpoint).Methods("POST")
 	
