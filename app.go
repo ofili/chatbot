@@ -134,6 +134,7 @@ func main() {
 	port := getPort()
 
 	r := mux.NewRouter()
+	r.Handle("/", http.FileServer(http.Dir("./views"))).Methods("GET")
 	r.HandleFunc("/webhook", VerificationEndpoint).Methods("GET")
 	r.HandleFunc("/webhook", MessagesEndpoint).Methods("POST")
 	
